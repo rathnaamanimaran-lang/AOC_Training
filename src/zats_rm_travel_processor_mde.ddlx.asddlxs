@@ -1,0 +1,36 @@
+@Metadata.layer: #CUSTOMER
+annotate entity ZATS_RM_TRAVEL_processor
+    with 
+{
+    @UI.selectionField: [{ position: 10 }]
+    @UI.lineItem: [{ position: 10 }]    
+    TravelId;
+    @UI.selectionField: [{ position: 20 }]
+    @UI.lineItem: [{ position: 20 }]
+    AgencyId;
+    @UI.selectionField: [{ position: 30 }]
+    @UI.lineItem: [{ position: 30 }]
+    CustomerId;
+    @UI.lineItem: [{ position: 40 }]
+    BeginDate;
+//    EndDate;
+//    @UI.lineItem: [{ position: 50 }]
+//    BookingFee;
+    @UI.lineItem: [{ position: 60 }]
+    TotalPrice;
+//    CurrencyCode;
+//    Description;
+    @UI.lineItem: [{ position: 70, importance: #HIGH, criticality: 'ColorCode' }]
+    OverallStatus;
+//    CreatedBy;
+//    CreatedAt;
+//    LastChangedBy;
+//    LastChangedAt;
+    /* Associations */
+//    _Agency;
+//    _Booking;
+//    _Curr;
+//    _Cust;
+//    _OverallSt;
+    
+}

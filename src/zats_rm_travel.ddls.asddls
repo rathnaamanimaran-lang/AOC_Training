@@ -12,9 +12,14 @@ association [1..1] to I_Currency as _Curr on
 association [1..1] to /DMO/I_Overall_Status_VH as _OverallSt on
     $projection.OverallStatus = _OverallSt.OverallStatus
 {
+    @ObjectModel.text.element: [ 'Description' ]
     key travel_id as TravelId,
+    @ObjectModel.text.element: [ 'AgencyName' ]
     agency_id as AgencyId,
+    _Agency.Name as AgencyName,
+    @ObjectModel.text.element: [ 'CustomerName' ]
     customer_id as CustomerId,
+    concat_with_space( _Cust.FirstName, _Cust.LastName, 2 ) as CustomerName,
     begin_date as BeginDate,
     end_date as EndDate,
     @Semantics.amount.currencyCode: 'CurrencyCode'
@@ -23,7 +28,16 @@ association [1..1] to /DMO/I_Overall_Status_VH as _OverallSt on
     total_price as TotalPrice,
     currency_code as CurrencyCode,
     description as Description,
+    @EndUserText.label: 'Current Status'
+    @ObjectModel.text.element: [ 'StatusText' ]
     overall_status as OverallStatus,
+    case overall_status
+        when 'X' then 1
+        when 'O' then 2
+        when 'A' then 3
+        else 1
+    end as ColorCode, 
+    _OverallSt._Text[ Language = $session.system_language ].Text as StatusText,
     @Semantics.user.createdBy: true
     created_by as CreatedBy,
     @Semantics.systemDateTime.createdAt: true

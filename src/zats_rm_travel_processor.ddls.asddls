@@ -19,7 +19,10 @@ define root view entity ZATS_RM_TRAVEL_processor as projection on zats_rm_travel
     CreatedAt,
     LastChangedBy,
     LastChangedAt,
-    
+    AgencyName,
+    CustomerName,
+    StatusText,
+    ColorCode,
     /* Associations */
     _Agency,
     
