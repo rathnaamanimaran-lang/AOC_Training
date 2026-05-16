@@ -15,7 +15,8 @@ ENDCLASS.
 
 
 
-CLASS zcl_rath_data_uplaoder IMPLEMENTATION.
+CLASS ZCL_RATH_DATA_UPLAODER IMPLEMENTATION.
+
 
 METHOD fill_master_data.
     data : lt_bp type table of zrath_bpa,
@@ -161,6 +162,7 @@ METHOD fill_master_data.
      insert zrath_product from table @lt_prod.
   ENDMETHOD.
 
+
   METHOD fill_transaction_data.
     data : o_rand type REF TO cl_abap_random_int,
            n type i,
@@ -218,9 +220,12 @@ METHOD fill_master_data.
     insert zrath_so_item from table @lt_so_i.
 
   ENDMETHOD.
+
+
  METHOD flush.
     delete from : zrath_bpa, zrath_product, zrath_so_hdr, zrath_so_item.
   ENDMETHOD.
+
 
   METHOD if_oo_adt_classrun~main.
    me->flush( ).

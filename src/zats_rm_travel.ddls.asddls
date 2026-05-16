@@ -1,7 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Root CDS for Travel request'
 @Metadata.ignorePropagatedAnnotations: true
-define root view entity zats_rm_travel as select from /dmo/travel_m
+define root view entity  zats_rm_travel  as select from /dmo/travel_m
 composition[0..*] of zats_rm_booking as _Booking
 association [1..1] to /DMO/I_Agency as _Agency on
     $projection.AgencyId = _Agency.AgencyID

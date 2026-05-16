@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_rath_demo IMPLEMENTATION.
+CLASS ZCL_RATH_DEMO IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
