@@ -1,0 +1,54 @@
+//managed tells RAP that developer want it to create most of the code automatically
+managed
+//to plugin extra coding/validatio,  this is where we do it
+implementation in class zbp_ats_rm_travel unique;
+//to syntax check strictly: 1 or 2; 2 is more strict
+strict ( 2 );
+//root entity behaviour
+define behavior for zats_rm_travel alias Travel
+//what behaviour CUD into which table
+persistent table /dmo/travel_m
+//similar to enqueue and dequeue
+lock master
+//for data security- authorizations to do CUD, this part of coding goes into implementation class mentioned above
+authorization master ( instance )
+//controls the behaviour of multiple users editing simultaneously using timestamp field
+etag master LastChangedAt
+{
+//behaviours RAP generate code for us
+  create;
+  update;
+  delete;
+  //feature control so user dont change the PK in update mode
+//  field ( readonly ) TravelId;
+//depends on travel, cannot exist on its own
+  association _Booking { create; }
+}
+
+define behavior for zats_rm_booking alias Booking
+persistent table /dmo/booking_m
+//if parent is locked,child also gets locked
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master LastChangedAt
+{
+  update;
+  delete;
+  //when booking is edited, travel cannot be changed
+  field ( readonly ) TravelId;
+  association _Travel;
+  association _Supplement { create; }
+}
+
+define behavior for zats_rm_suppl alias Supplement
+persistent table /dmo/booksuppl_m
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master LastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) TravelId, BookingId;
+  association _Travel;
+  association _Booking;
+}

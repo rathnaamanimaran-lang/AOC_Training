@@ -1,6 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Supplement processor'
 @Metadata.ignorePropagatedAnnotations: false
+@Metadata.allowExtensions: true
 @VDM.viewType: #CONSUMPTION
 define view entity ZATS_RM_SUPPL_PROCESSOR as projection on zats_rm_suppl
 {
