@@ -1,6 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Root CDS for Travel request'
 @Metadata.ignorePropagatedAnnotations: true
+@Metadata.allowExtensions: true
 define root view entity  zats_rm_travel  as select from /dmo/travel_m
 composition[0..*] of zats_rm_booking as _Booking
 association [1..1] to /DMO/I_Agency as _Agency on
@@ -15,9 +16,21 @@ association [1..1] to /DMO/I_Overall_Status_VH as _OverallSt on
     @ObjectModel.text.element: [ 'Description' ]
     key travel_id as TravelId,
     @ObjectModel.text.element: [ 'AgencyName' ]
+    @Consumption.valueHelpDefinition: [{
+        entity: {
+            name: '/DMO/I_Agency',
+            element: 'AgencyID'
+        }
+    }]
     agency_id as AgencyId,
     _Agency.Name as AgencyName,
     @ObjectModel.text.element: [ 'CustomerName' ]
+    @Consumption.valueHelpDefinition: [{
+        entity: {
+            name: '/DMO/I_Customer',
+            element: 'CustomerID'
+        }
+    }]
     customer_id as CustomerId,
     concat_with_space( _Cust.FirstName, _Cust.LastName, 2 ) as CustomerName,
     begin_date as BeginDate,
@@ -26,10 +39,23 @@ association [1..1] to /DMO/I_Overall_Status_VH as _OverallSt on
     booking_fee as BookingFee,
     @Semantics.amount.currencyCode: 'CurrencyCode'
     total_price as TotalPrice,
+    @Consumption.valueHelpDefinition: [{
+        entity: {
+            name: 'I_Currency',
+            element: 'Currency'
+        }
+    }]
+//    @ObjectModel.text.element: [ '_Curr._Text' ]
     currency_code as CurrencyCode,
     description as Description,
     @EndUserText.label: 'Current Status'
     @ObjectModel.text.element: [ 'StatusText' ]
+    @Consumption.valueHelpDefinition: [{
+        entity: {
+            name: '/DMO/I_Overall_Status_VH',
+            element: 'OverallStatus'
+        }
+    }]
     overall_status as OverallStatus,
     case overall_status
         when 'X' then 1

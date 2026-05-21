@@ -16,9 +16,23 @@ association [1] to /DMO/I_SupplementText as _SupplTxt
     key travel_id as TravelId,
     key booking_id as BookingId,
     key booking_supplement_id as BookingSupplementId,
+    @Consumption.valueHelpDefinition: [{
+//       qualifier: '',
+       entity: {
+           name: '/DMO/I_Supplement',
+           element: 'SupplementID'
+       }
+   }]
     supplement_id as SupplementId,
     @Semantics.amount.currencyCode: 'CurrencyCode'
     price as Price,
+    @Consumption.valueHelpDefinition: [{
+       qualifier: '',
+       entity: {
+           name: 'I_Currency',
+           element: 'Currency'
+       }
+   }] 
     currency_code as CurrencyCode,
     @Semantics.systemDateTime.lastChangedAt: true
     last_changed_at as LastChangedAt,

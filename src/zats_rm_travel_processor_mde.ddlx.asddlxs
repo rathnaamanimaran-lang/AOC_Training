@@ -1,26 +1,112 @@
 @Metadata.layer: #CUSTOMER
+@UI.headerInfo:{
+    typeName: 'Travel Request',
+    typeNamePlural: 'Travel Requests',
+    title: { value: 'TravelId' },
+    description: { value: 'Description' }
+}
 annotate entity ZATS_RM_TRAVEL_processor
     with 
 {
+    @UI.facet: [{ 
+        purpose: #HEADER,
+        id: 'HeaderPrice',
+        type: #DATAPOINT_REFERENCE,
+        position: 10,
+        targetQualifier: 'HdrPrice'
+     },
+     { 
+        purpose: #HEADER,
+        id: 'HeaderStatus',
+        type: #DATAPOINT_REFERENCE,
+        position: 20,
+        targetQualifier: 'HdrPrice2'
+     },
+     { 
+        purpose: #STANDARD,
+        id: 'GeneralInfo',
+        type: #COLLECTION,
+        position: 10,
+        label: 'General Information'
+     },
+     { 
+        purpose: #STANDARD,
+        id: 'basicdata',
+        parentId: 'GeneralInfo',
+        type: #IDENTIFICATION_REFERENCE,
+        position: 10,
+        label: 'Basic Data'
+        
+     },
+     { 
+        purpose: #STANDARD,
+        id: 'dates',
+        parentId: 
+         'GeneralInfo',
+        type: #FIELDGROUP_REFERENCE,
+        position: 20,
+        label: 'Travel Dates',
+        targetQualifier: 'fieldgrp1'
+     },
+     { 
+        purpose: #STANDARD,
+        id: 'prices',
+        parentId: 
+         'GeneralInfo',
+        type: #FIELDGROUP_REFERENCE,
+        position: 30,
+        label: 'Costs',
+        targetQualifier: 'fieldgrp2'
+     },
+     { 
+        purpose: #STANDARD,
+        id: 'Items',
+        type: #LINEITEM_REFERENCE,
+        position: 20,
+        label: 'Bookings',
+        targetElement: '_Booking'
+     }
+     ]
     @UI.selectionField: [{ position: 10 }]
     @UI.lineItem: [{ position: 10 }]    
+    @UI.identification: [{ position: 10}]
     TravelId;
     @UI.selectionField: [{ position: 20 }]
     @UI.lineItem: [{ position: 20 }]
+    @UI.identification: [{ position: 30 }]
     AgencyId;
     @UI.selectionField: [{ position: 30 }]
     @UI.lineItem: [{ position: 30 }]
+    @UI.identification: [{ position: 40 }]
     CustomerId;
     @UI.lineItem: [{ position: 40 }]
+    @UI.fieldGroup: [{ position: 10, qualifier: 'fieldgrp1' }]
     BeginDate;
-//    EndDate;
+    @UI.fieldGroup: [{ position: 20, qualifier: 'fieldgrp1' }]
+    EndDate;
 //    @UI.lineItem: [{ position: 50 }]
-//    BookingFee;
+//    @UI.fieldGroup: [{ position: 10 }]
+    @UI.fieldGroup: [{ position: 10, qualifier: 'fieldgrp2' }]
+    BookingFee;
     @UI.lineItem: [{ position: 60 }]
+    @UI.dataPoint: { 
+    qualifier: 'HdrPrice',
+    title: 'Total Price'
+     }
+     @UI.fieldGroup: [{ position: 20, qualifier: 'fieldgrp2' }]
     TotalPrice;
-//    CurrencyCode;
-//    Description;
+    @UI.fieldGroup: [{ position: 30, qualifier: 'fieldgrp2' }]
+    CurrencyCode;
+    @UI.identification: [{ position: 20 }]
+    Description;
     @UI.lineItem: [{ position: 70, importance: #HIGH, criticality: 'ColorCode' }]
+    @UI.selectionField: [{ position: 40 }]
+    @UI.dataPoint: {
+        qualifier: 'HdrPrice2',        
+        title: 'Travel Status',        
+        criticality: 'ColorCode'
+    }
+    @UI.fieldGroup: [{ position: 40, qualifier: 'fieldgrp1', criticality: 'ColorCode' }]
     OverallStatus;
 //    CreatedBy;
 //    CreatedAt;
