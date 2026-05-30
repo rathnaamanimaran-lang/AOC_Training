@@ -3,7 +3,7 @@
 @Metadata.ignorePropagatedAnnotations: false
 @Metadata.allowExtensions: true
 @VDM.viewType: #CONSUMPTION
-define root view entity ZATS_RM_TRAVEL_processor as projection on zats_rm_travel
+define root view entity ZATS_RM_TRAVEL_PROCESSOR as projection on zats_rm_travel
 {
     key TravelId,
     AgencyId,
@@ -13,6 +13,7 @@ define root view entity ZATS_RM_TRAVEL_processor as projection on zats_rm_travel
     BookingFee,
     TotalPrice,
     CurrencyCode,
+//    CurrencyName,
     Description,
     OverallStatus,
     CreatedBy,

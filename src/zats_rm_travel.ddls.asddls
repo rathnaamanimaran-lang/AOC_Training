@@ -1,6 +1,6 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Root CDS for Travel request'
-@Metadata.ignorePropagatedAnnotations: true
+@Metadata.ignorePropagatedAnnotations: false
 @Metadata.allowExtensions: true
 define root view entity  zats_rm_travel  as select from /dmo/travel_m
 composition[0..*] of zats_rm_booking as _Booking
@@ -45,8 +45,11 @@ association [1..1] to /DMO/I_Overall_Status_VH as _OverallSt on
             element: 'Currency'
         }
     }]
-//    @ObjectModel.text.element: [ '_Curr._Text' ]
+//    _Curr._Text[ Language = $session.system_language ].CurrencyName as CurrencyName,
+//    @ObjectModel.text.element: [ 'CurrencyName' ]
     currency_code as CurrencyCode,
+//    concat(concat( _Curr._Text[ Language = $session.system_language ].CurrencyName, ' - ' ), currency_code) as CurrencyName,
+//    concat_with_space( _Curr._Text[ Language = $session.system_language ].CurrencyName, currency_code , 2 ) as CurrencyName,
     description as Description,
     @EndUserText.label: 'Current Status'
     @ObjectModel.text.element: [ 'StatusText' ]

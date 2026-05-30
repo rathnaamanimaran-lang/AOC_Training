@@ -5,7 +5,7 @@
     title: { value: 'TravelId' },
     description: { value: 'Description' }
 }
-annotate entity ZATS_RM_TRAVEL_processor
+annotate entity ZATS_RM_TRAVEL_PROCESSOR
     with 
 {
     @UI.facet: [{ 
