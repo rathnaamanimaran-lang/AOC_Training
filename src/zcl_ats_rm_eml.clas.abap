@@ -92,11 +92,11 @@ CLASS zcl_ats_rm_eml IMPLEMENTATION.
 *                    FAILED LT_FAILED MAPPED DATA(lt_mapped) REPORTED LT_REPORTED.
 
         MODIFY ENTITIES OF zats_rm_travel
-            ENTITY Travel CREATE AUTO FILL CID FIELDS ( travelid agencyid customerid description overallstatus )
+            ENTITY Travel CREATE AUTO FILL CID FIELDS ( agencyid customerid description overallstatus )
                 WITH VALUE #(
                                 (
 *                                    %cid = 'CID1'
-                                    travelid = '000123494'
+*                                    travelid = '000123594'
                                     agencyid = lv_agency
                                     CustomerId = lv_cust
                                     BeginDate = cl_abap_context_info=>get_system_date(  )
@@ -144,7 +144,7 @@ CLASS zcl_ats_rm_eml IMPLEMENTATION.
 *            VALUE #( ( TravelId = '1213354' AgencyId = lv_agency Description = lv_descr ) )
 *                FAILED lt_failed MAPPED lt_mapped REPORTED lt_reported.
 
-        MODIFY ENTITIES OF zats_rm_travel ENTITY Travel UPDATE FIELDS ( TravelId AgencyId Description ) WITH VALUE #(
+        MODIFY ENTITIES OF zats_rm_travel ENTITY Travel UPDATE FIELDS ( AgencyId Description ) WITH VALUE #(
         ( TravelId = '025' AgencyId = lv_agency Description = lv_descr ) ) ENTITY Booking UPDATE FIELDS ( BookingId BookingStatus )
         WITH VALUE #( ( TravelId = '025' BookingId = '02' BookingStatus = 'Y' ) ) FAILED lt_failed MAPPED lt_mapped REPORTED lt_reported.
 
