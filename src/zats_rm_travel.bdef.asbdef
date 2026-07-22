@@ -52,6 +52,7 @@ persistent table /dmo/booking_m
 lock dependent by _Travel
 authorization dependent by _Travel
 etag master LastChangedAt
+early numbering
 {
 //  create;
   update;
